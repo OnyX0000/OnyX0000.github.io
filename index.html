@@ -16,6 +16,8 @@
     .dark body { background-color: #1a202c; color: #f7fafc; }
     .dark header, .dark footer { background-color: #2d3748; }
     .dark .section-title { color: #90cdf4; }
+    .accordion-content { display: none; }
+    .accordion-header.active + .accordion-content { display: block; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900 transition-colors duration-300">
@@ -42,23 +44,29 @@
       <button class="tab-btn px-4 py-1 border rounded" data-category="cv">컴퓨터비전 <i class="fas fa-camera ml-1"></i></button>
     </div>
     <div id="project-list" class="grid md:grid-cols-2 gap-8">
-      <div class="project-item" data-category="ai">
-        <img src="https://raw.githubusercontent.com/Re-Dev-Wanted/ProjectISG-AI/main/static/project_cover.png" alt="ProjectISG-AI" class="w-full h-48 object-cover rounded">
-        <h3 class="text-xl font-bold mt-4">ProjectISG-AI</h3>
-        <p class="section-subtitle">LangChain 기반 감성일지 생성 시스템</p>
-        <a href="https://github.com/Re-Dev-Wanted/ProjectISG-AI" target="_blank" class="text-blue-600 hover:underline">깃허브 바로가기 →</a>
+      <div class="project-item accordion" data-category="ai">
+        <button class="accordion-header text-left w-full font-semibold text-lg bg-gray-100 p-2 rounded hover:bg-gray-200">ProjectISG-AI</button>
+        <div class="accordion-content p-4 border border-t-0 rounded-b">
+          <img src="https://raw.githubusercontent.com/Re-Dev-Wanted/ProjectISG-AI/main/static/project_cover.png" alt="ProjectISG-AI" class="w-full h-48 object-cover rounded">
+          <p class="section-subtitle mt-4">LangChain 기반 감성일지 생성 시스템</p>
+          <a href="https://github.com/Re-Dev-Wanted/ProjectISG-AI" target="_blank" class="text-blue-600 hover:underline">깃허브 바로가기 →</a>
+        </div>
       </div>
-      <div class="project-item" data-category="ai">
-        <img src="https://raw.githubusercontent.com/OnyX0000/Presentation-Agent/main/static/cover.png" alt="Presentation Agent" class="w-full h-48 object-cover rounded">
-        <h3 class="text-xl font-bold mt-4">Presentation-Agent</h3>
-        <p class="section-subtitle">PDF 기반 발표 자동화 + Q&A 챗봇</p>
-        <a href="https://github.com/OnyX0000/Presentation-Agent" target="_blank" class="text-blue-600 hover:underline">깃허브 바로가기 →</a>
+      <div class="project-item accordion" data-category="ai">
+        <button class="accordion-header text-left w-full font-semibold text-lg bg-gray-100 p-2 rounded hover:bg-gray-200">Presentation-Agent</button>
+        <div class="accordion-content p-4 border border-t-0 rounded-b">
+          <img src="https://raw.githubusercontent.com/OnyX0000/Presentation-Agent/main/static/cover.png" alt="Presentation Agent" class="w-full h-48 object-cover rounded">
+          <p class="section-subtitle mt-4">PDF 기반 발표 자동화 + Q&A 챗봇</p>
+          <a href="https://github.com/OnyX0000/Presentation-Agent" target="_blank" class="text-blue-600 hover:underline">깃허브 바로가기 →</a>
+        </div>
       </div>
-      <div class="project-item" data-category="cv">
-        <img src="https://raw.githubusercontent.com/OnyX0000/Parking_Genius/main/static/parking_demo.jpg" alt="Parking Genius" class="w-full h-48 object-cover rounded">
-        <h3 class="text-xl font-bold mt-4">Parking Genius</h3>
-        <p class="section-subtitle">YOLO 기반 주차 인식 시스템</p>
-        <a href="https://github.com/OnyX0000/Parking_Genius" target="_blank" class="text-blue-600 hover:underline">깃허브 바로가기 →</a>
+      <div class="project-item accordion" data-category="cv">
+        <button class="accordion-header text-left w-full font-semibold text-lg bg-gray-100 p-2 rounded hover:bg-gray-200">Parking Genius</button>
+        <div class="accordion-content p-4 border border-t-0 rounded-b">
+          <img src="https://raw.githubusercontent.com/OnyX0000/Parking_Genius/main/static/parking_demo.jpg" alt="Parking Genius" class="w-full h-48 object-cover rounded">
+          <p class="section-subtitle mt-4">YOLO 기반 주차 인식 시스템</p>
+          <a href="https://github.com/OnyX0000/Parking_Genius" target="_blank" class="text-blue-600 hover:underline">깃허브 바로가기 →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -101,6 +109,16 @@
             item.style.display = "none";
           }
         });
+      });
+    });
+
+    // 아코디언 기능 추가
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        header.classList.toggle('active');
+        const content = header.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
       });
     });
   </script>
