@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>데이터사이언티스트 이진규 | 포트폴리오</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    .section-title { @apply text-3xl font-semibold mb-6 text-indigo-600; }
+    .section-subtitle { @apply text-xl text-gray-700 mb-4; }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-in.show { opacity: 1; transform: translateY(0); }
+    .nav-link.active { color: #6366f1; font-weight: bold; }
+    .dark body { background-color: #1a202c; color: #f7fafc; }
+    .dark header, .dark footer { background-color: #2d3748; }
+    .dark .section-title { color: #90cdf4; }
+    .accordion-content { display: none; }
+    .accordion-header.active + .accordion-content { display: block; }
+    .accordion-header::after { content: '▼'; float: right; transition: transform 0.3s ease; }
+    .accordion-header.active::after { content: '▲'; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 transition-colors duration-300">
+<!-- (기존 헤더, 섹션 등은 그대로 유지됨) -->
+
+<script>
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav-link");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute("id");
+      const link = document.querySelector(`.nav-link[href="#${id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        if (link) link.classList.add("active");
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.2 });
+  sections.forEach((section) => observer.observe(section));
+
+  document.getElementById("themeToggle").addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+  });
+
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const projectItems = document.querySelectorAll(".project-item");
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const category = btn.dataset.category;
+      tabButtons.forEach(b => b.classList.remove("bg-indigo-100"));
+      btn.classList.add("bg-indigo-100");
+      projectItems.forEach((item) => {
+        if (category === "all" || item.dataset.category === category) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+  });
+
+  // 아코디언 기능 (단일 열림 + 아이콘 변화)
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  accordionHeaders.forEach((header, index) => {
+    header.addEventListener('click', () => {
+      accordionHeaders.forEach(h => {
+        if (h !== header) {
+          h.classList.remove('active');
+          h.nextElementSibling.style.display = 'none';
+        }
+      });
+      header.classList.toggle('active');
+      const content = header.nextElementSibling;
+      content.style.display = header.classList.contains('active') ? 'block' : 'none';
+    });
+
+    // 기본 열림 설정 (첫 번째 프로젝트 열림)
+    if (index === 0) {
+      header.classList.add('active');
+      header.nextElementSibling.style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>

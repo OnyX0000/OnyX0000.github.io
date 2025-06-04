@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>데이터사이언티스트 이진규 | 포트폴리오</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    .section-title { @apply text-3xl font-semibold mb-6 text-indigo-600; }
+    .section-subtitle { @apply text-xl text-gray-700 mb-4; }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-in.show { opacity: 1; transform: translateY(0); }
+    .nav-link.active { color: #6366f1; font-weight: bold; }
+    .dark body { background-color: #1a202c; color: #f7fafc; }
+    .dark header, .dark footer { background-color: #2d3748; }
+    .dark .section-title { color: #90cdf4; }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .accordion-header::after { content: '▼'; float: right; transition: transform 0.3s ease; }
+    .accordion-header.active::after { content: '▲'; }
+    .accordion-header.active + .accordion-content {
+      max-height: 500px;
+    }
+    .accordion-index {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .accordion-index ul {
+      list-style: disc;
+      padding-left: 1rem;
+    }
+    .accordion-index li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 transition-colors duration-300">
+
+<!-- 아코디언 인덱스 목록 -->
+<div class="accordion-index hidden md:block">
+  <h3 class="font-semibold text-indigo-600 mb-2">📂 프로젝트 목록</h3>
+  <ul id="accordionIndex"></ul>
+</div>
+
+<script>
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav-link");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute("id");
+      const link = document.querySelector(`.nav-link[href="#${id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        if (link) link.classList.add("active");
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.2 });
+  sections.forEach((section) => observer.observe(section));
+
+  document.getElementById("themeToggle").addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+  });
+
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const projectItems = document.querySelectorAll(".project-item");
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const category = btn.dataset.category;
+      tabButtons.forEach(b => b.classList.remove("bg-indigo-100"));
+      btn.classList.add("bg-indigo-100");
+      projectItems.forEach((item) => {
+        if (category === "all" || item.dataset.category === category) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+  });
+
+  // 아코디언 기능 (단일 열림 + 아이콘 변화 + 애니메이션 + 로컬 저장)
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  const accordionIndex = document.getElementById('accordionIndex');
+  accordionHeaders.forEach((header, index) => {
+    const content = header.nextElementSibling;
+    const projectName = header.textContent.trim();
+
+    // 인덱스 리스트 생성
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#';
+    a.textContent = projectName;
+    a.classList.add("text-sm", "text-blue-600", "hover:underline");
+    a.addEventListener('click', () => {
+      header.scrollIntoView({ behavior: 'smooth' });
+    });
+    li.appendChild(a);
+    accordionIndex.appendChild(li);
+
+    // 기본 열림 (첫 번째)
+    if (index === 0) {
+      header.classList.add('active');
+      content.style.maxHeight = content.scrollHeight + 'px';
+      localStorage.setItem('activeAccordion', projectName);
+    }
+
+    // 클릭 이벤트 처리
+    header.addEventListener('click', () => {
+      accordionHeaders.forEach((h, i) => {
+        const c = h.nextElementSibling;
+        if (h !== header) {
+          h.classList.remove('active');
+          c.style.maxHeight = null;
+        }
+      });
+
+      header.classList.toggle('active');
+      if (header.classList.contains('active')) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        localStorage.setItem('activeAccordion', projectName);
+      } else {
+        content.style.maxHeight = null;
+        localStorage.removeItem('activeAccordion');
+      }
+    });
+  });
+
+  // 로컬 저장 복원
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('activeAccordion');
+    if (saved) {
+      accordionHeaders.forEach((header) => {
+        if (header.textContent.trim() === saved) {
+          header.classList.add('active');
+          header.nextElementSibling.style.maxHeight = header.nextElementSibling.scrollHeight + 'px';
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>

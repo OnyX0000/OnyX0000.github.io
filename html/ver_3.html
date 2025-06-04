@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>데이터사이언티스트 이진규 | 포트폴리오</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .section-title {
+      @apply text-3xl font-semibold mb-6 text-indigo-600;
+    }
+    .section-subtitle {
+      @apply text-xl text-gray-700 mb-4;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-indigo-600">이진규</h1>
+      <nav class="space-x-6">
+        <a href="#about" class="hover:text-indigo-500">소개</a>
+        <a href="#projects" class="hover:text-indigo-500">프로젝트</a>
+        <a href="#skills" class="hover:text-indigo-500">기술</a>
+        <a href="#awards" class="hover:text-indigo-500">수상</a>
+        <a href="#education" class="hover:text-indigo-500">학력</a>
+        <a href="#contact" class="hover:text-indigo-500">연락처</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-5xl mx-auto px-6 py-16 space-y-20">
+    <section id="about">
+      <h2 class="section-title">소개</h2>
+      <p class="text-lg leading-relaxed">
+        AI 기능의 완성도를 높여 LLM과 AI 에이전트 기술을 실전 문제에 연결하는 데 집중하는 데이터사이언티스트 이진규입니다.<br>
+        문서화, 흐름 정리, 기획-개발 간 협업 등 팀 프로젝트 내에서의 유연성과 책임감을 동시에 갖추었으며,
+        다양한 실전 프로젝트와 수상 경험을 통해 데이터 기반 문제 해결력과 실행력을 검증받았습니다.
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">주요 프로젝트</h2>
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-bold">ProjectISG-AI</h3>
+          <p class="section-subtitle">LangChain 기반 인게임 감성일지 생성 + MBTI 추론 시스템 (FastAPI)</p>
+          <ul class="list-disc list-inside">
+            <li>LangGraph 기반 일지 생성 구조 설계 및 MBTI 조건 분기 체인 구현</li>
+            <li>ChromaDB + RAG로 말투 스타일 반영 및 감정 분석 체인 독립 구성</li>
+            <li>FastAPI 백엔드에서 전체 API 흐름, DB ORM 모델, 다중 엔드포인트 설계</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold">Presentation-Agent</h3>
+          <p class="section-subtitle">PDF 발표자료 기반 자동 대본 생성 + Q&A 챗봇</p>
+          <ul class="list-disc list-inside">
+            <li>RAG + DuckDuckGo Agent를 통한 외부 정보 보강</li>
+            <li>코드블록 중심 문서에 적합한 구조적 chunking 및 Streamlit UI 구성</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold">Parking Genius</h3>
+          <p class="section-subtitle">YOLOv11 기반 주차 공간 자동 인식 시스템</p>
+          <ul class="list-disc list-inside">
+            <li>YOLOv11l/x 모델 비교 학습 및 최적 모델 선택</li>
+            <li>FastAPI + HTML 기반 웹 시연 시스템 구축</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title">기술 스택</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <span>Python / FastAPI / SQL</span>
+        <span>LangChain / LangGraph / RAG</span>
+        <span>PyTorch / Tensorflow / Scikit-learn</span>
+        <span>PostgreSQL / SQLite / ChromaDB</span>
+        <span>Git / GitHub / JIRA</span>
+        <span>Docker / AWS / Linux</span>
+      </div>
+    </section>
+
+    <section id="awards">
+      <h2 class="section-title">수상 및 인증</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <li>2024년 2학기 캡스톤디자인 경진대회 공과대학 대상</li>
+        <li>AWS Rookie Championship Elastic 상</li>
+        <li>빅데이터 경진대회 총장상 (TOP4)</li>
+        <li>Wanted Potenup Data/AI 양성과정 수료 (2025)</li>
+      </ul>
+    </section>
+
+    <section id="education">
+      <h2 class="section-title">학력</h2>
+      <p class="text-lg">상명대학교 휴먼지능정보공학과 졸업 (2017.03 - 2024.02)</p>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">연락처</h2>
+      <ul class="space-y-2">
+        <li><i class="fas fa-envelope mr-2"></i><strong>Email:</strong> jinkyu2jinkyu@gmail.com</li>
+        <li><i class="fas fa-phone mr-2"></i><strong>Phone:</strong> +82 10-6224-4698</li>
+        <li><i class="fab fa-github mr-2"></i><strong>GitHub:</strong> <a href="https://github.com/OnyX0000" class="text-indigo-600 hover:underline">github.com/OnyX0000</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-8 text-gray-500 text-sm">
+    © 2025 이진규. All rights reserved.
+  </footer>
+</body>
+</html>
